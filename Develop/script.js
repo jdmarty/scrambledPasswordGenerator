@@ -63,7 +63,9 @@ function generatePassword() {
         `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}\nspecial characters: ${wantSpec ? "Yes ✔" : "No ❌"}\nHow many characters do you want in your password? (8 to 128)`
       )
     );
+    //check to see if the user input is in the acceptable range and a truthy values
     if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
+      //give the user an option to cancel the prompts here
       var badInput = confirm("Invalid entry please enter a number between 8 and 128");
       if (!badInput) return "";
     }
@@ -76,9 +78,11 @@ function generatePassword() {
     ${wantNum ? "numbers?\n" : ""}
     ${wantSpec ? "special characters?" : ""}`
   );
+  //if the user confirms that they want to procede, continue to generating a password
   if (!confirmGenerate) return "";
   //until the function is returned...
   while (true) {
+    //set the initial password to an empty string
     var password = "";
     //until you have generated a password of the appropriate length...
     for (let i = 0; i < passwordLength; i++) {
