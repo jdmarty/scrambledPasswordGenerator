@@ -34,6 +34,20 @@ function generatePassword() {
     if (!passwordLength) return ''
     if (passwordLength < 8 || passwordLength > 128 || !passwordLength) alert("Invalid entry please enter a number between 8 and 128");
   }
+  //ask user what character options they would like in their password
+  var wantLCL = confirm(`Do you want lowercase letters in your password?`);
+  if (wantLCL) characterOptions += lowercaseLetters;
+  var wantUCL = confirm(`Do you want uppercase letters in your password?\n lowercase: ${wantLCL ? 'Yes':'No'}`);
+  if (wantUCL) characterOptions += uppercaseLetters;
+  var wantNum = confirm(`Do you want numbers in your password?\n lowercase: ${wantLCL ? 'Yes':'No'}\n uppercase ${wantUCL ? 'Yes':'No'}`);
+  if (wantNum) characterOptions += numbers;
+  var wantSpec = confirm(`Do you want special characters in your password?\n lowercase: ${wantLCL ? 'Yes':'No'}\n uppercase: ${wantUCL ? 'Yes':'No'}\n numbers: ${wantNum ? 'Yes':'No'}`);
+  if (wantSpec) characterOptions += specialChar;
+  //If the user has not selected any character types, alert them and end the function
+  if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
+    alert('ERROR you must select at least on valid input type');
+    return ''
+  }
 
 }
 
