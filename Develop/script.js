@@ -51,7 +51,26 @@ function generatePassword() {
   //Show the user their selections and ask them to confirm that this is what they want to generate
   var confirmGenerate = confirm(`Are you sure you want a password ${passwordLength} characters long containing:\n\n${wantLCL ? 'lowercase letters?\n' : ''}${wantUCL ? 'uppercase letters?\n' : ''}${wantNum ? 'numbers?\n' : ''}${wantSpec ? 'special characters?' : ''}`)
   if (!confirmGenerate) return ''
-
+  //until the function is returned...
+  var counter = 0;
+  while (counter < 10) {
+    counter++
+    var password = ''
+    //until you have generated a password of the appropriate length...
+    for (let i = 0; i < passwordLength; i++) {
+      //select a new character from the array of valid options
+      newChar = characterOptions[getRandomInt(characterOptions.length-1)];
+      //check what type of character you have selected and change the associated boolean value
+      if (lowercaseLetters.includes(newChar)) includesLCL = true;
+      if (uppercaseLetters.includes(newChar)) includesUCL = true;
+      if (numbers.includes(newChar)) includesNum = true;
+      if (specialChar.includes(newChar)) includesSpec = true;
+      //add the new character to your password
+      password = password + newChar;
+    }
+    //if all of the desired character types are present in the password, return the password, this will end the loop
+    if (includesLCL === wantLCL && includesUCL === wantUCL && includesNum === wantNum && includesSpec === wantSpec) return password
+  }
 }
 
 
