@@ -28,7 +28,14 @@ function generatePassword() {
   var includesSpec = false;
   var passwordLength = 0;
   var characterOptions = '';
+  //prompt user to enter a number between 8 and 128 until they do so successfully
+  while (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
+    passwordLength = parseInt(prompt('How many characters would you like in your password? (8 to 128)'));
+    if (!passwordLength) return ''
+    if (passwordLength < 8 || passwordLength > 128 || !passwordLength) alert("Invalid entry please enter a number between 8 and 128");
+  }
 
+}
 
 
 //random integer function
