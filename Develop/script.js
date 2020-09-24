@@ -7,12 +7,10 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
 
 //generatePassword function
 function generatePassword() {
@@ -60,7 +58,13 @@ function generatePassword() {
   //prompt user to enter a number between 8 and 128 until they do so successfully
   while (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
     passwordLength = parseInt(
-      prompt("How many characters would you like in your password? (8 to 128)")
+      prompt(
+        `lowercase: ${wantLCL ? "Yes" : "No"}\n uppercase: ${
+          wantUCL ? "Yes" : "No"
+        }\n numbers: ${wantNum ? "Yes" : "No"}\n special characters: ${
+          wantSpec ? "Yes" : "No"
+        }\n How many characters do you want in your password? (8 to 128)`
+      )
     );
     if (!passwordLength) return "";
     if (passwordLength < 8 || passwordLength > 128 || !passwordLength)
@@ -100,7 +104,6 @@ function generatePassword() {
       return password;
   }
 }
-
 
 //random integer function
 function getRandomInt(max) {
