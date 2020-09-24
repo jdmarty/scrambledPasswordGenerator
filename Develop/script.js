@@ -52,9 +52,7 @@ function generatePassword() {
   var confirmGenerate = confirm(`Are you sure you want a password ${passwordLength} characters long containing:\n\n${wantLCL ? 'lowercase letters?\n' : ''}${wantUCL ? 'uppercase letters?\n' : ''}${wantNum ? 'numbers?\n' : ''}${wantSpec ? 'special characters?' : ''}`)
   if (!confirmGenerate) return ''
   //until the function is returned...
-  var counter = 0;
-  while (counter < 10) {
-    counter++
+  while (true) {
     var password = ''
     //until you have generated a password of the appropriate length...
     for (let i = 0; i < passwordLength; i++) {
