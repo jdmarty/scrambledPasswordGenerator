@@ -5,7 +5,6 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 }
 
@@ -14,7 +13,7 @@ generateBtn.addEventListener("click", writePassword);
 
 //generatePassword function
 function generatePassword() {
-  //create initial empty arrays for letters
+  //assign strings containing each type of acceptable character"
   var lowercaseLetters = "abscdefghijklmnopqrstuvwxyz";
   var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "123456789";
@@ -28,46 +27,46 @@ function generatePassword() {
   var characterOptions = "";
 
   //ask user what character options they would like in their password
-  var wantLCL = confirm(`Do you want lowercase letters in your password?`);
+  //ask the user if they want to include lowercase letters
+  var wantLCL = confirm(
+    `Do you want lowercase letters in your password?`);
+  //if they do, add lowercase letters to the options string
   if (wantLCL) characterOptions += lowercaseLetters;
+  //ask the user if they want to include uppercase letters
   var wantUCL = confirm(
-    `Do you want uppercase letters in your password?\n
-    lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}`
+    `Do you want uppercase letters in your password?\nlowercase: ${wantLCL ? "Yes ✔" : "No ❌"}`
   );
+  //if they do, add uppercase letters to the options string
   if (wantUCL) characterOptions += uppercaseLetters;
+  //ask the user if they want to include numbers
   var wantNum = confirm(
-    `Do you want numbers in your password?\n
-    lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n
-    uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}`
+    `Do you want numbers in your password?\nlowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}`
   );
+  //if they do, add numbers to the options string
   if (wantNum) characterOptions += numbers;
+  //ask the user if they want to include special characters
   var wantSpec = confirm(
-    `Do you want special characters in your password?\n 
-    lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n
-    uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\n
-    numbers: ${wantNum ? "Yes ✔" : "No ❌"}`
+    `Do you want special characters in your password?\nlowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}`
   );
+  //if they do, add them to the options string
   if (wantSpec) characterOptions += specialChar;
-  //If the user has not selected any character types, alert them and end the function
+  //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
     alert("ERROR you must select at least on valid input type");
     return "";
   }
   //prompt user to enter a number between 8 and 128 until they do so successfully
   while (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
+    //password length must be parsed as an integer, meaning it will return a whole number or NaN (falsy)
     passwordLength = parseInt(
       prompt(
-        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n 
-        uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\n
-        numbers: ${wantNum ? "Yes ✔" : "No ❌"}\n
-        special characters: ${wantSpec ? "Yes ✔" : "No ❌"}\n
-        \n
-        How many characters do you want in your password? (8 to 128)`
+        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}\nspecial characters: ${wantSpec ? "Yes ✔" : "No ❌"}\nHow many characters do you want in your password? (8 to 128)`
       )
     );
-    if (!passwordLength) return "";
-    if (passwordLength < 8 || passwordLength > 128 || !passwordLength)
-      alert("Invalid entry please enter a number between 8 and 128");
+    if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
+      var badInput = confirm("Invalid entry please enter a number between 8 and 128");
+      if (!badInput) return "";
+    }
   }
   //Show the user their selections and ask them to confirm that this is what they want to generate
   var confirmGenerate = confirm(
