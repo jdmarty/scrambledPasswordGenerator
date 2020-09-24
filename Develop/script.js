@@ -48,6 +48,9 @@ function generatePassword() {
     alert('ERROR you must select at least on valid input type');
     return ''
   }
+  //Show the user their selections and ask them to confirm that this is what they want to generate
+  var confirmGenerate = confirm(`Are you sure you want a password ${passwordLength} characters long containing:\n\n${wantLCL ? 'lowercase letters?\n' : ''}${wantUCL ? 'uppercase letters?\n' : ''}${wantNum ? 'numbers?\n' : ''}${wantSpec ? 'special characters?' : ''}`)
+  if (!confirmGenerate) return ''
 
 }
 
