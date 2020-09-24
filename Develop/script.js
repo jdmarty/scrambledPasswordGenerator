@@ -31,23 +31,21 @@ function generatePassword() {
   var wantLCL = confirm(`Do you want lowercase letters in your password?`);
   if (wantLCL) characterOptions += lowercaseLetters;
   var wantUCL = confirm(
-    `Do you want uppercase letters in your password?\n lowercase: ${
-      wantLCL ? "Yes ✔" : "No ❌"
-    }`
+    `Do you want uppercase letters in your password?\n
+    lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}`
   );
   if (wantUCL) characterOptions += uppercaseLetters;
   var wantNum = confirm(
-    `Do you want numbers in your password?\n lowercase: ${
-      wantLCL ? "Yes ✔" : "No ❌"
-    }\n uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}`
+    `Do you want numbers in your password?\n
+    lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n
+    uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}`
   );
   if (wantNum) characterOptions += numbers;
   var wantSpec = confirm(
-    `Do you want special characters in your password?\n lowercase: ${
-      wantLCL ? "Yes ✔" : "No ❌"
-    }\n uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\n numbers: ${
-      wantNum ? "Yes ✔" : "No ❌"
-    }`
+    `Do you want special characters in your password?\n 
+    lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n
+    uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\n
+    numbers: ${wantNum ? "Yes ✔" : "No ❌"}`
   );
   if (wantSpec) characterOptions += specialChar;
   //If the user has not selected any character types, alert them and end the function
@@ -59,11 +57,12 @@ function generatePassword() {
   while (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
     passwordLength = parseInt(
       prompt(
-        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n uppercase: ${
-          wantUCL ? "Yes ✔" : "No ❌"
-        }\n numbers: ${wantNum ? "Yes ✔" : "No ❌"}\n special characters: ${
-          wantSpec ? "Yes ✔" : "No ❌"
-        }\n\n How many characters do you want in your password? (8 to 128)`
+        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\n 
+        uppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\n
+        numbers: ${wantNum ? "Yes ✔" : "No ❌"}\n
+        special characters: ${wantSpec ? "Yes ✔" : "No ❌"}\n
+        \n
+        How many characters do you want in your password? (8 to 128)`
       )
     );
     if (!passwordLength) return "";
@@ -72,11 +71,11 @@ function generatePassword() {
   }
   //Show the user their selections and ask them to confirm that this is what they want to generate
   var confirmGenerate = confirm(
-    `Are you sure you want a password ${passwordLength} characters long containing:\n${
-      wantLCL ? "lowercase letters?\n" : ""
-    }${wantUCL ? "uppercase letters?\n" : ""}${wantNum ? "numbers?\n" : ""}${
-      wantSpec ? "special characters?" : ""
-    }`
+    `Are you sure you want a password ${passwordLength} characters long containing:\n
+    ${wantLCL ? "lowercase letters?\n" : ""}
+    ${wantUCL ? "uppercase letters?\n" : ""}
+    ${wantNum ? "numbers?\n" : ""}
+    ${wantSpec ? "special characters?" : ""}`
   );
   if (!confirmGenerate) return "";
   //until the function is returned...
