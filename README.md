@@ -15,6 +15,7 @@
 
 ### Generate a password from existing criteria
 - After you set your criteria, a panel will be added to the bottom of the screen that displays your current criteria
+![Criteria Panel](https://github.com/jdmarty/scrambledPasswordGenerator/blob/master/Assets/deployed-screenshot.PNG)
 - Click the "Redo" button to quickly generate a new password from those existing criteria.
 - Click the "Generate Password" button to create a new set of criteria
 
