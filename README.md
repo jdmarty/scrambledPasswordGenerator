@@ -4,7 +4,7 @@
 - Deployed [https://jdmarty.github.io/scrambledPasswordGenerator/](https://jdmarty.github.io/scrambledPasswordGenerator/)
 - Repository [https://github.com/jdmarty/scrambledPasswordGenerator](https://github.com/jdmarty/scrambledPasswordGenerator)
 
-![Scrambled Password Generator]()
+![Scrambled Password Generator](https://github.com/jdmarty/scrambledPasswordGenerator/blob/master/Assets/deployed-screenshot.PNG)
 
 ## How to Use
 ### Generating a new password
