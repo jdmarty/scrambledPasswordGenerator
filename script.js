@@ -137,13 +137,12 @@ function buildPassword(passwordLength) {
   var includesUCL = false;
   var includesNum = false;
   var includesSpec = false;
-  //set the initial password to an empty string
   var password = "";
   //until you have generated a password of the appropriate length...
   for (let i = 0; i < passwordLength; i++) {
     //select a new character from the string of valid options
     newChar = characterOptions[getRandomInt(characterOptions.length - 1)];
-    //check what type of character you have selected and change the associated global boolean value
+    //check what type of character you have selected and change the associated boolean value
     if (lowercaseLetters.includes(newChar)) includesLCL = true;
     if (uppercaseLetters.includes(newChar)) includesUCL = true;
     if (numbers.includes(newChar)) includesNum = true;
@@ -163,7 +162,7 @@ function buildPassword(passwordLength) {
     //and return the password
     return password;
   } else {
-    //run the function again
+    //otherwise run the function again
     return buildPassword(passwordLength);
   }
 }

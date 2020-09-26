@@ -120,10 +120,12 @@ button[disabled] {
   padding: 2px;
   width: 1.2em;
   cursor: pointer;
+  border-radius: 10%;
 }
 
 #copy:hover {
-  border: 1px solid black;
+  background-color: grey;
+  color: white;
 }
 
 /* Set options panel to not display at first */
