@@ -9,6 +9,10 @@ var includesLCL = false;
 var includesUCL = false;
 var includesNum = false;
 var includesSpec = false;
+var wantLCL = false;
+var wantUCL = false;
+var wantNum = false;
+var wantSpec = false;
 var passwordLength = 0;
 var characterOptions = ''
 //assign options panel elements by ID
@@ -57,13 +61,13 @@ function generatePassword() {
   numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`;
 
   //ask the user if they want to include lowercase letters
-  var wantLCL = promptChoice("lowercase letters", lowercaseLetters, lowercaseOption);
+  wantLCL = promptChoice("lowercase letters", lowercaseLetters, lowercaseOption);
   //ask the user if they want to include uppercase letters and update the option in DOM
-  var wantUCL = promptChoice("uppercase letters", uppercaseLetters, uppercaseOption);
+  wantUCL = promptChoice("uppercase letters", uppercaseLetters, uppercaseOption);
   //ask the user if they want to include numbers
-  var wantNum = promptChoice("numbers", numbers, numbersOption);
+  wantNum = promptChoice("numbers", numbers, numbersOption);
   //ask the user if they want to include special characters
-  var wantSpec = promptChoice("special characters", specialChar, specialOption);
+  wantSpec = promptChoice("special characters", specialChar, specialOption);
   //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
     alert("ERROR you must select at least on valid input type");
@@ -82,7 +86,7 @@ function generatePassword() {
   if (!confirmGenerate) return "";
   
   //run the buildPassword helper function, which will keep calling until it generates a password that meets criteria
-  return buildPassword(passwordLength, wantLCL, wantUCL, wantNum, wantSpec);
+  return buildPassword(passwordLength);
 }
 
 //re-generate password function
@@ -129,7 +133,7 @@ function promptNumber() {
 }
 
 //function to build a password of the desired length and attributes
-function buildPassword(passwordLength, wantLCL, wantUCL, wantNum, wantSpec) {
+function buildPassword(passwordLength) {
   //set the initial password to an empty string
   var password = "";
   //until you have generated a password of the appropriate length...
