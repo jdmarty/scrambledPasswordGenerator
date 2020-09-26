@@ -42,29 +42,34 @@ function generatePassword() {
   specialOption.textContent = "Special Characters";
   numberOfCharacters.textContent = "Number of Characters: ";
 
+  //prompt user to enter a number between 8 and 128 until they do so successfully
+  var passwordLength = promptNumber();
+  //if the user selected to end the prompts, end the function here
+  if (!passwordLength) return "";
+  //otherwise, print the users number of characters selection to the DOM
+  numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`;
+
   //ask the user if they want to include lowercase letters
-  var wantLCL = promptChoice('lowercase letters', lowercaseLetters, lowercaseOption);
+  var wantLCL = promptChoice("lowercase letters", lowercaseLetters, lowercaseOption);
   //ask the user if they want to include uppercase letters and update the option in DOM
-  var wantUCL = promptChoice('uppercase letters', uppercaseLetters, uppercaseOption);
+  var wantUCL = promptChoice("uppercase letters", uppercaseLetters, uppercaseOption);
   //ask the user if they want to include numbers
-  var wantNum = promptChoice('numbers', numbers, numbersOption);
+  var wantNum = promptChoice("numbers", numbers, numbersOption);
   //ask the user if they want to include special characters
-  var wantSpec = promptChoice('special characters', specialChar, specialOption);
+  var wantSpec = promptChoice("special characters", specialChar, specialOption);
   //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
     alert("ERROR you must select at least on valid input type");
     return "";
   }
 
-  //prompt user to enter a number between 8 and 128 until they do so successfully
-  var passwordLength = promptNumber();
-  //if the user selected to end the prompts, end the function here
-  if (!passwordLength) return ''
-  //otherwise, print the users number of characters selection to the DOM
-  numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`
-
   //Show the user their selections and ask them to confirm that this is what they want to generate
-  var confirmGenerate = confirm(`Are you sure you want a password ${passwordLength} characters long containing: \n\n${wantLCL ? "lowercase letters?\n" : ""}${wantUCL ? "uppercase letters?\n" : ""}${wantNum ? "numbers?\n" : ""}${wantSpec ? "special characters?" : ""}`
+  var confirmGenerate = confirm(
+    `Are you sure you want a password ${passwordLength} characters long containing: \n\n${
+      wantLCL ? "lowercase letters?\n" : ""
+    }${wantUCL ? "uppercase letters?\n" : ""}${wantNum ? "numbers?\n" : ""}${
+      wantSpec ? "special characters?" : ""
+    }`
   );
   //if the user does not confirm that they want to proceed, end the function here
   if (!confirmGenerate) return "";

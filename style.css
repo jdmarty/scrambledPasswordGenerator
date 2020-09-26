@@ -148,4 +148,7 @@ li {
   .btn {
     font-size: 0.8rem;
   }
+  ul {
+    flex-direction: column;
+  }
 }
