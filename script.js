@@ -4,13 +4,20 @@ var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
 var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "123456789";
 var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+//assign initial values
+var includesLCL = false;
+var includesUCL = false;
+var includesNum = false;
+var includesSpec = false;
+var passwordLength = 0;
 var characterOptions = ''
 //assign options panel elements by ID
 var lowercaseOption = document.getElementById('lowercaseOption');
 var uppercaseOption = document.getElementById('uppercaseOption');
 var numbersOption = document.getElementById('numbersOption');
 var specialOption = document.getElementById('specialOption');
-var numberOfCharacters = document.getElementById('numberOfCharacters')
+var numberOfCharacters = document.getElementById('numberOfCharacters');
+var optionsPanel = document.getElementById('optionsPanel');
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -28,11 +35,11 @@ generateBtn.addEventListener("click", writePassword);
 //generatePassword function
 function generatePassword() {
   //set initial values
-  var includesLCL = false;
-  var includesUCL = false;
-  var includesNum = false;
-  var includesSpec = false;
-  var passwordLength = 0;
+  includesLCL = false;
+  includesUCL = false;
+  includesNum = false;
+  includesSpec = false;
+  passwordLength = 0;
   characterOptions = "";
 
   //reset DOM Elements
@@ -73,33 +80,15 @@ function generatePassword() {
   );
   //if the user does not confirm that they want to proceed, end the function here
   if (!confirmGenerate) return "";
-
-  //until the function is returned...
-  while (true) {
-    //set the initial password to an empty string
-    var password = "";
-    //until you have generated a password of the appropriate length...
-    for (let i = 0; i < passwordLength; i++) {
-      //select a new character from the string of valid options
-      newChar = characterOptions[getRandomInt(characterOptions.length - 1)];
-      //check what type of character you have selected and change the associated boolean value
-      if (lowercaseLetters.includes(newChar)) includesLCL = true;
-      if (uppercaseLetters.includes(newChar)) includesUCL = true;
-      if (numbers.includes(newChar)) includesNum = true;
-      if (specialChar.includes(newChar)) includesSpec = true;
-      //add the new character to your password
-      password += newChar;
-    }
-    //if all of the desired character types are present in the password, return the password, this will end the loop
-    if (
-      includesLCL === wantLCL &&
-      includesUCL === wantUCL &&
-      includesNum === wantNum &&
-      includesSpec === wantSpec
-    )
-      return password;
-  }
+  
+  //run the buildPassword helper function, which will keep calling until it generates a password that meets criteria
+  return buildPassword(passwordLength, wantLCL, wantUCL, wantNum, wantSpec);
 }
+
+//re-generate password function
+
+
+
 
 //random integer function
 function getRandomInt(max) {
@@ -125,7 +114,7 @@ function promptChoice(promptString, characters, element) {
 //function to prompt the user to enter a number
 function promptNumber() {
   //parse the prompt as an integer so it returns a whole number or NaN (falsy)
-  var passwordLength = parseInt(prompt("How many characters do you want in your password?"));
+  var passwordLength = parseInt(prompt("How many characters do you want in your password?\nMin: 8 characters\nMax: 128 characters"));
   //validate the response is in acceptable range and truthy
   if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
     //give the user an option to end the prompts here
@@ -136,5 +125,38 @@ function promptNumber() {
   } else {
     //if the password length is in range, return it
     return passwordLength;
+  }
+}
+
+//function to build a password of the desired length and attributes
+function buildPassword(passwordLength, wantLCL, wantUCL, wantNum, wantSpec) {
+  //set the initial password to an empty string
+  var password = "";
+  //until you have generated a password of the appropriate length...
+  for (let i = 0; i < passwordLength; i++) {
+    //select a new character from the string of valid options
+    newChar = characterOptions[getRandomInt(characterOptions.length - 1)];
+    //check what type of character you have selected and change the associated global boolean value
+    if (lowercaseLetters.includes(newChar)) includesLCL = true;
+    if (uppercaseLetters.includes(newChar)) includesUCL = true;
+    if (numbers.includes(newChar)) includesNum = true;
+    if (specialChar.includes(newChar)) includesSpec = true;
+    //add the new character to your password
+    password += newChar;
+  }
+  //if all of the desired character types are present in the password...
+  if (
+    includesLCL === wantLCL &&
+    includesUCL === wantUCL &&
+    includesNum === wantNum &&
+    includesSpec === wantSpec
+  ) {
+    //display the options panel
+    optionsPanel.style.display = "block";
+    //and return the password
+    return password;
+  } else {
+    //run the function again
+    return buildPassword(passwordLength);
   }
 }
