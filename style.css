@@ -108,6 +108,24 @@ button[disabled] {
   overflow: hidden;
 }
 
+.textAreaWrapper {
+  position: relative;
+}
+
+#copy {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 4px;
+  padding: 2px;
+  width: 1.2em;
+  cursor: pointer;
+}
+
+#copy:hover {
+  border: 1px solid black;
+}
+
 /* Set options panel to not display at first */
 #optionsPanel {
   display: none;

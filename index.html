@@ -22,12 +22,15 @@
         </header>
         <!-- Article holding text area to display password -->
         <article class="card-body">
-          <textarea
-            readonly
-            id="password"
-            placeholder="Your Secure Password"
-            aria-label="Generated Password"
-          ></textarea>
+          <div class="textAreaWrapper">
+            <textarea
+              readonly
+              id="password"
+              placeholder="Your Secure Password"
+              aria-label="Generated Password"
+            ></textarea>
+            <img src="Assets/copy-solid.svg" alt="Copy to clipboard" id="copy"/>
+          </div>
         </article>
         <!-- Footer containing button that generate new criteria on click -->
         <footer class="card-footer">
