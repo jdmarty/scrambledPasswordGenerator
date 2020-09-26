@@ -19,6 +19,9 @@
 - Click the "Redo" button to quickly generate a new password from those existing criteria.
 - Click the "Generate Password" button to create a new set of criteria
 
+### Copy to clipboard
+- Click the copy button in the bottom right corner of the text area to copy the password to the clipboard
+
 ------------------------------------
 # 03 JavaScript: Password Generator
 
