@@ -62,7 +62,7 @@ function generatePassword() {
   specialOption.textContent = "Special Characters";
   numberOfCharacters.textContent = "Number of Characters: ";
 
-  //prompt user to enter a number between 8 and 128 until they do so successfully
+  //prompt user to enter a number between 8 and 128 and set the global length variable to the returned value
   passwordLength = promptNumber();
   //if the user selected to end the prompts, end the function here
   if (!passwordLength) return "";
