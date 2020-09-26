@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+/* General sizing for high order elements */
 html,
 body,
 .wrapper {
@@ -12,17 +13,20 @@ body,
   padding: 0;
 }
 
+/* Styling for all content in body */
 body {
   font-family: sans-serif;
   background-color: #f9fbfd;
 }
 
+/* padding for thin wrapper around content */
 .wrapper {
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
+/* General styling for header content */
 header {
   text-align: center;
   padding: 20px;
@@ -30,6 +34,7 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+/* Styling for both card elements */
 .card {
   background-color: hsl(0, 0%, 100%);
   border-radius: 5px;
@@ -42,11 +47,13 @@ header {
   padding: 30px 40px;
 }
 
-.card-header, p {
+/* Centering for header and p tag in criteria panel */
+.card-header, .card-footer, p {
   text-align: center;
 }
 
-.card-header::after {
+/* Add a thin, gray line after every card header and before every card footer */
+.card-header::after, .card-footer::before  {
   content: " ";
   display: block;
   width: 100%;
@@ -54,28 +61,12 @@ header {
   height: 2px;
 }
 
+/* Prevent card-body from collapsing below 100px */
 .card-body {
   min-height: 100px;
 }
 
-.card-footer {
-  text-align: center;
-}
-
-.card-footer::before {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: #e7e9eb;
-  height: 2px;
-}
-
-.card-footer::after {
-  content: " ";
-  display: block;
-  clear: both;
-}
-
+/* Styling for button elements */
 .btn {
   border: none;
   background-color: hsl(360, 91%, 36%);
@@ -92,15 +83,13 @@ header {
   cursor: pointer;
 }
 
+/* Styling for disabled buttons (not currently in use) */
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
 }
 
-.float-right {
-  float: right;
-}
-
+/* Styling for password output */
 #password {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -108,46 +97,43 @@ button[disabled] {
   border: none;
   display: block;
   width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 15px;
   padding-bottom: 85px;
   font-size: 1.2rem;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px auto;
   border: 2px dashed #c0c7cf;
   border-radius: 6px;
   resize: none;
   overflow: hidden;
 }
 
+/* Set options panel to not display at first */
+#optionsPanel {
+  display: none;
+}
+/* Set list of criteria to display evenly spaced */
 ul {
   display: flex;
   justify-content: space-evenly;
 }
-li {
-  display: inline-flex;
-  list-style: none;
-}
+  li {
+    display: inline-flex;
+    list-style: none;
+  }
 
-#optionsPanel {
-  display: none;
-}
-
-
+/* Media query to decrease font size and padding and margins of buttons on medium screens */
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
   }
-
   #password {
     font-size: 1rem;
   }
 }
-
+/* Media query to decrease button font size  further and reorder criteria elements on small screens */
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;

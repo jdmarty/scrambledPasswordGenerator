@@ -8,14 +8,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="wrapper">
+    <!-- Wrapper for a header and two sections -->
+    <main class="wrapper">
+      <!-- Header for main content -->
       <header>
         <h1>Password Generator</h1>
       </header>
+      <!-- Section containing a header for title and article that will display password -->
       <section class="card">
+        <!-- Header containing single h2 tag for Generator-->
         <header class="card-header">
           <h2>Generate a Password</h2>
         </header>
+        <!-- Article holding text area to display password -->
         <article class="card-body">
           <textarea
             readonly
@@ -24,16 +29,22 @@
             aria-label="Generated Password"
           ></textarea>
         </article>
+        <!-- Footer containing button that generate new criteria on click -->
         <footer class="card-footer">
           <button id="generate" class="btn">Generate Password</button>
         </footer>
       </section>
+      <!-- Section containing a header for title and article that will display password -->
       <section class="card" style="margin-top: 12px;" id="optionsPanel">
+        <!-- Header containing single h2 tag for Criteria -->
         <header class="card-header">
           <h2>Your Password Criteria</h2>
         </header>
+        <!-- Article holding p tag for num of char and list of criteria options -->
         <article class="card-body">
+          <!-- Displays number of character criteria -->
           <p id="numberOfCharacters">Number of Characters: </p>
+          <!-- List of password criteria -->
           <ul>
             <li id="lowercaseOption">Lowercase</li>
             <li id="uppercaseOption">Uppercase</li>
@@ -41,11 +52,12 @@
             <li id="specialOption">Special Characters</li>
           </ul>
         </article>
+        <!-- Footer containing button to regenerate password from existing criteria -->
         <footer class="card-footer">
           <button id="regenerate" class="btn">Redo</button>
         </footer>
       </section>
-    </div>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>
