@@ -1,3 +1,24 @@
+# Scrambled Password Generator
+
+## Links
+- Deployed [https://jdmarty.github.io/scrambledPasswordGenerator/](https://jdmarty.github.io/scrambledPasswordGenerator/)
+- Repository [https://github.com/jdmarty/scrambledPasswordGenerator](https://github.com/jdmarty/scrambledPasswordGenerator)
+
+![Scrambled Password Generator]()
+
+## How to Use
+### Generating a new password
+- Click the "Generate Password" button to display a series of prompts that will set your password criteria.
+- When asked to enter a number of characters, input a number between 8 and 128.
+- Answer each of the subsequent prompts to add lowercase letters, uppercase letters, numbers, and special characters to your password
+- Review your selections and click OK to generate a password that fits those criteria.
+
+### Generate a password from existing criteria
+- After you set your criteria, a panel will be added to the bottom of the screen that displays your current criteria
+- Click the "Redo" button to quickly generate a new password from those existing criteria.
+- Click the "Generate Password" button to create a new set of criteria
+
+------------------------------------
 # 03 JavaScript: Password Generator
 
 ## Your Task

@@ -4,7 +4,7 @@ var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
 var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "123456789";
 var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-//assign initial values
+//assign initial global values
 var includesLCL = false;
 var includesUCL = false;
 var includesNum = false;
@@ -53,11 +53,12 @@ function generatePassword() {
   //set initial values
   includesLCL = false;
   includesUCL = false;
-  includesNum = false;8
+  includesNum = false;
   includesSpec = false;
   passwordLength = 0;
   characterOptions = "";
-
+  //hide the options panel if it is not hidden already
+  optionsPanel.style.display = "none";
   //reset DOM Elements
   lowercaseOption.textContent = "Lowercase";
   uppercaseOption.textContent = "Uppercase";
@@ -102,7 +103,8 @@ function generatePassword() {
 }
 
 
-
+//Helper Functions//
+//--------------------------------------------------------------------------------------------------------------------
 //random integer function
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -131,7 +133,7 @@ function promptNumber() {
   //validate the response is in acceptable range and truthy
   if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
     //give the user an option to end the prompts here
-    var badInput = confirm("Invalid entry please enter a number between 8 and 128");
+    var badInput = confirm("Invalid input. Please enter a number between 8 and 128");
     if (!badInput) return false;
     //or run the function again if they confirm
     return promptNumber();
