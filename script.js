@@ -14,7 +14,7 @@ var wantUCL = false;
 var wantNum = false;
 var wantSpec = false;
 var passwordLength = 0;
-var characterOptions = ''
+var characterOptions = '';
 //assign options panel elements by ID
 var lowercaseOption = document.getElementById('lowercaseOption');
 var uppercaseOption = document.getElementById('uppercaseOption');
@@ -23,8 +23,9 @@ var specialOption = document.getElementById('specialOption');
 var numberOfCharacters = document.getElementById('numberOfCharacters');
 var optionsPanel = document.getElementById('optionsPanel');
 
-// Assignment Code
+//Assign buttons
 var generateBtn = document.querySelector("#generate");
+var regenerateBtn = document.querySelector('#regenerate');
 
 // Write password to the #password input
 function writePassword() {
@@ -33,15 +34,26 @@ function writePassword() {
   passwordText.value = password;
 }
 
+//Rewrite password based on current global variables
+function rewritePassword() {
+  var password = buildPassword(passwordLength);
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+  console.log(password);
+}
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+//Add event listener to regenerate button
+regenerateBtn.addEventListener("click", rewritePassword);
 
 //generatePassword function
 function generatePassword() {
   //set initial values
   includesLCL = false;
   includesUCL = false;
-  includesNum = false;
+  includesNum = false;8
   includesSpec = false;
   passwordLength = 0;
   characterOptions = "";
@@ -54,7 +66,7 @@ function generatePassword() {
   numberOfCharacters.textContent = "Number of Characters: ";
 
   //prompt user to enter a number between 8 and 128 until they do so successfully
-  var passwordLength = promptNumber();
+  passwordLength = promptNumber();
   //if the user selected to end the prompts, end the function here
   if (!passwordLength) return "";
   //otherwise, print the users number of characters selection to the DOM
@@ -88,9 +100,6 @@ function generatePassword() {
   //run the buildPassword helper function, which will keep calling until it generates a password that meets criteria
   return buildPassword(passwordLength);
 }
-
-//re-generate password function
-
 
 
 
