@@ -12,11 +12,7 @@ var wantSpec = false;
 var passwordLength = 0;
 var characterOptions = '';
 //assign options panel elements by ID
-var lowercaseOption = document.getElementById('lowercaseOption');
-var uppercaseOption = document.getElementById('uppercaseOption');
-var numbersOption = document.getElementById('numbersOption');
-var specialOption = document.getElementById('specialOption');
-var numberOfCharacters = document.getElementById('numberOfCharacters');
+var criteria = document.getElementById('criteria');
 var optionsPanel = document.getElementById('optionsPanel');
 
 //Assign buttons
@@ -56,12 +52,8 @@ function generatePassword() {
   //hide the options panel if it is not hidden already
   optionsPanel.style.display = "none";
   //reset DOM Elements
-  lowercaseOption.textContent = "Lowercase";
-  uppercaseOption.textContent = "Uppercase";
-  numbersOption.textContent = "Numbers";
-  specialOption.textContent = "Special Characters";
   numberOfCharacters.textContent = "Number of Characters: ";
-
+  criteria.innerHTML = '';
   //prompt user to enter a number between 8 and 128 and set the global length variable to the returned value
   passwordLength = promptNumber();
   //if the user selected to end the prompts, end the function here
@@ -70,13 +62,13 @@ function generatePassword() {
   numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`;
 
   //ask the user if they want to include lowercase letters
-  wantLCL = promptChoice("lowercase letters", lowercaseLetters, lowercaseOption);
+  wantLCL = promptChoice("lowercase letters", lowercaseLetters, 'Lowercase');
   //ask the user if they want to include uppercase letters and update the option in DOM
-  wantUCL = promptChoice("uppercase letters", uppercaseLetters, uppercaseOption);
+  wantUCL = promptChoice("uppercase letters", uppercaseLetters, 'Uppercase');
   //ask the user if they want to include numbers
-  wantNum = promptChoice("numbers", numbers, numbersOption);
+  wantNum = promptChoice("numbers", numbers, 'Numbers');
   //ask the user if they want to include special characters
-  wantSpec = promptChoice("special characters", specialChar, specialOption);
+  wantSpec = promptChoice("special characters", specialChar, 'Special Characters');
   //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
     alert("ERROR you must select at least on valid input type");
@@ -107,17 +99,16 @@ function getRandomInt(max) {
 }
 
 //function to call a confirm containing an input string, associated characters, and DOM element to update 
-function promptChoice(promptString, characters, element) {
+function promptChoice(promptString, characters, domString) {
   //ask the user to confirm if they want a certain type of character
   var wanted = confirm(`Do you want ${promptString} in your password?`);
   //if they do, update the global character options variable and the associated DOM element
   if (wanted) {
     characterOptions += characters;
-    element.textContent += " ✔";
-  //if they dont, just update the associated DOM element
-  } else {
-    element.textContent += " ❌";
-  }
+    var newCriteria = document.createElement('li');
+    newCriteria.textContent = `${domString} ✔`;
+    criteria.append(newCriteria);
+  };
   //return the result of the confirm prompt
   return wanted;
 }
