@@ -34,3 +34,13 @@
 
 //outside the for loop, check that all the includes variables match the confirm values. Run the loop again if they do not
 //return password
+
+  //ask the user if they want to include lowercase letters
+  var wantLCL = confirm(`Do you want lowercase letters in your password?`);
+  //if they do, add lowercase letters to the options string
+  if (wantLCL) {
+    characterOptions += lowercaseLetters;
+    lowercaseOption.textContent += " ✔";
+  } else {
+    lowercaseOption.textContent += " ❌";
+  }

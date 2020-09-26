@@ -4,7 +4,8 @@ var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
 var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "123456789";
 var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-//assign list items by ID
+var characterOptions = ''
+//assign options panel elements by ID
 var lowercaseOption = document.getElementById('lowercaseOption');
 var uppercaseOption = document.getElementById('uppercaseOption');
 var numbersOption = document.getElementById('numbersOption');
@@ -32,7 +33,7 @@ function generatePassword() {
   var includesNum = false;
   var includesSpec = false;
   var passwordLength = 0;
-  var characterOptions = "";
+  characterOptions = "";
 
   //reset DOM Elements
   lowercaseOption.textContent = "Lowercase";
@@ -42,41 +43,13 @@ function generatePassword() {
   numberOfCharacters.textContent = "Number of Characters: ";
 
   //ask the user if they want to include lowercase letters
-  var wantLCL = confirm(`Do you want lowercase letters in your password?`);
-  //if they do, add lowercase letters to the options string
-  if (wantLCL) {
-    characterOptions += lowercaseLetters;
-    lowercaseOption.textContent += " ✔";
-  } else {
-    lowercaseOption.textContent += " ❌";
-  }
+  var wantLCL = promptChoice('lowercase letters', lowercaseLetters, lowercaseOption);
   //ask the user if they want to include uppercase letters and update the option in DOM
-  var wantUCL = confirm(`Do you want uppercase letters in your password?`);
-  //if they do, add uppercase letters to the options string and update the option in DOM
-  if (wantUCL) {
-    characterOptions += uppercaseLetters;
-    uppercaseOption.textContent += " ✔";
-  } else {
-    uppercaseOption.textContent += " ❌";
-  }
+  var wantUCL = promptChoice('uppercase letters', uppercaseLetters, uppercaseOption);
   //ask the user if they want to include numbers
-  var wantNum = confirm(`Do you want numbers in your password?`);
-  //if they do, add numbers to the options string and update the option in DOM
-  if (wantNum) {
-    characterOptions += numbers;
-    numbersOption.textContent += " ✔";
-  } else {
-    numbersOption.textContent += " ❌";
-  }
+  var wantNum = promptChoice('numbers', numbers, numbersOption);
   //ask the user if they want to include special characters
-  var wantSpec = confirm(`Do you want special characters in your password?`);
-  //if they do, add them to the options string and update the option in DOM
-  if (wantSpec) {
-    characterOptions += specialChar;
-    specialOption.textContent += " ✔";
-  } else {
-    specialOption.textContent += " ❌";
-  }
+  var wantSpec = promptChoice('special characters', specialChar, specialOption);
   //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
     alert("ERROR you must select at least on valid input type");
@@ -99,7 +72,7 @@ function generatePassword() {
   }
   //print the users number selection to the DOM
   numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`
-  
+
   //Show the user their selections and ask them to confirm that this is what they want to generate
   var confirmGenerate = confirm(
     `Are you sure you want a password ${passwordLength} characters long containing: \n${
@@ -140,4 +113,20 @@ function generatePassword() {
 //random integer function
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
+}
+
+//function to call a confirm with the input string, associated characters, and DOM element to update 
+function promptChoice(promptString, characters, element) {
+  //ask the user to confirm if they want a certain type of character
+  var wanted = confirm(`Do you want ${promptString} in your password?`);
+  //if they do, update the global character options variable and the associated DOM element
+  if (wanted) {
+    characterOptions += characters;
+    element.textContent += " ✔";
+  //if they dont, update just the associated DOM element
+  } else {
+    element.textContent += " ❌";
+  }
+  //return the result of the confirm prompt
+  return wanted;
 }
