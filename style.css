@@ -42,7 +42,7 @@ header {
   padding: 30px 40px;
 }
 
-.card-header {
+.card-header, p {
   text-align: center;
 }
 

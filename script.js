@@ -9,6 +9,7 @@ var lowercaseOption = document.getElementById('lowercaseOption');
 var uppercaseOption = document.getElementById('uppercaseOption');
 var numbersOption = document.getElementById('numbersOption');
 var specialOption = document.getElementById('specialOption');
+var numberOfCharacters = document.getElementById('numberOfCharacters')
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
@@ -32,28 +33,26 @@ function generatePassword() {
   var includesSpec = false;
   var passwordLength = 0;
   var characterOptions = "";
-  //reset DOM Elements
-  lowercaseOption.textContent = "Lowercase"
-  uppercaseOption.textContent = "Uppercase"
-  numbersOption.textContent = "Numbers"
-  specialOption.textContent = "Special Characters"
 
-  //ask user what character options they would like in their password
+  //reset DOM Elements
+  lowercaseOption.textContent = "Lowercase";
+  uppercaseOption.textContent = "Uppercase";
+  numbersOption.textContent = "Numbers";
+  specialOption.textContent = "Special Characters";
+  numberOfCharacters.textContent = "Number of Characters: ";
+
   //ask the user if they want to include lowercase letters
-  var wantLCL = confirm(
-    `Do you want lowercase letters in your password?`);
+  var wantLCL = confirm(`Do you want lowercase letters in your password?`);
   //if they do, add lowercase letters to the options string
   if (wantLCL) {
     characterOptions += lowercaseLetters;
-    lowercaseOption.textContent += ' ✔'
+    lowercaseOption.textContent += " ✔";
   } else {
     lowercaseOption.textContent += " ❌";
   }
-  //ask the user if they want to include uppercase letters
-  var wantUCL = confirm(
-    `Do you want uppercase letters in your password?`
-  );
-  //if they do, add uppercase letters to the options string
+  //ask the user if they want to include uppercase letters and update the option in DOM
+  var wantUCL = confirm(`Do you want uppercase letters in your password?`);
+  //if they do, add uppercase letters to the options string and update the option in DOM
   if (wantUCL) {
     characterOptions += uppercaseLetters;
     uppercaseOption.textContent += " ✔";
@@ -61,10 +60,8 @@ function generatePassword() {
     uppercaseOption.textContent += " ❌";
   }
   //ask the user if they want to include numbers
-  var wantNum = confirm(
-    `Do you want numbers in your password?`
-  );
-  //if they do, add numbers to the options string
+  var wantNum = confirm(`Do you want numbers in your password?`);
+  //if they do, add numbers to the options string and update the option in DOM
   if (wantNum) {
     characterOptions += numbers;
     numbersOption.textContent += " ✔";
@@ -72,10 +69,8 @@ function generatePassword() {
     numbersOption.textContent += " ❌";
   }
   //ask the user if they want to include special characters
-  var wantSpec = confirm(
-    `Do you want special characters in your password?`
-  );
-  //if they do, add them to the options string
+  var wantSpec = confirm(`Do you want special characters in your password?`);
+  //if they do, add them to the options string and update the option in DOM
   if (wantSpec) {
     characterOptions += specialChar;
     specialOption.textContent += " ✔";
@@ -91,22 +86,29 @@ function generatePassword() {
   while (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
     //password length must be parsed as an integer, meaning it will return a whole number or NaN (falsy)
     passwordLength = parseInt(
-      prompt(
-        `How many characters do you want in your password? (8 to 128)`
-      )
+      prompt(`How many characters do you want in your password? (8 to 128)`)
     );
-    //check to see if the user input is in the acceptable range and a truthy values
+    //check to see if the user input is in the acceptable range and a truthy value
     if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
       //give the user an option to cancel the prompts here
-      var badInput = confirm("Invalid entry please enter a number between 8 and 128");
+      var badInput = confirm(
+        "Invalid entry please enter a number between 8 and 128"
+      );
       if (!badInput) return "";
     }
   }
+  //print the users number selection to the DOM
+  numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`
+  
   //Show the user their selections and ask them to confirm that this is what they want to generate
   var confirmGenerate = confirm(
-    `Are you sure you want a password ${passwordLength} characters long containing: \n${wantLCL ? "lowercase letters?\n" : ''}${wantUCL ? "uppercase letters?\n" : ''}${wantNum ? "numbers?\n" : ""}${wantSpec ? "special characters?" : ''}`
+    `Are you sure you want a password ${passwordLength} characters long containing: \n${
+      wantLCL ? "lowercase letters?\n" : ""
+    }${wantUCL ? "uppercase letters?\n" : ""}${wantNum ? "numbers?\n" : ""}${
+      wantSpec ? "special characters?" : ""
+    }`
   );
-  //if the user confirms that they want to procede, continue to generating a password
+  //if the user confirms that they want to proceed, continue to generating a password
   if (!confirmGenerate) return "";
   //until the function is returned...
   while (true) {
@@ -122,7 +124,7 @@ function generatePassword() {
       if (numbers.includes(newChar)) includesNum = true;
       if (specialChar.includes(newChar)) includesSpec = true;
       //add the new character to your password
-      password = password + newChar;
+      password += newChar;
     }
     //if all of the desired character types are present in the password, return the password, this will end the loop
     if (
