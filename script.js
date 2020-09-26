@@ -14,7 +14,7 @@ generateBtn.addEventListener("click", writePassword);
 //generatePassword function
 function generatePassword() {
   //assign strings containing each type of acceptable character"
-  var lowercaseLetters = "abscdefghijklmnopqrstuvwxyz";
+  var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
   var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numbers = "123456789";
   var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
@@ -60,7 +60,7 @@ function generatePassword() {
     //password length must be parsed as an integer, meaning it will return a whole number or NaN (falsy)
     passwordLength = parseInt(
       prompt(
-        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}\nspecial characters: ${wantSpec ? "Yes ✔" : "No ❌"}\nHow many characters do you want in your password? (8 to 128)`
+        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}\nspecial characters: ${wantSpec ? "Yes ✔" : "No ❌"}\n\nHow many characters do you want in your password? (8 to 128)`
       )
     );
     //check to see if the user input is in the acceptable range and a truthy values
@@ -72,11 +72,7 @@ function generatePassword() {
   }
   //Show the user their selections and ask them to confirm that this is what they want to generate
   var confirmGenerate = confirm(
-    `Are you sure you want a password ${passwordLength} characters long containing:\n
-    ${wantLCL ? "lowercase letters?\n" : ""}
-    ${wantUCL ? "uppercase letters?\n" : ""}
-    ${wantNum ? "numbers?\n" : ""}
-    ${wantSpec ? "special characters?" : ""}`
+    `Are you sure you want a password ${passwordLength} characters long containing: \n${wantLCL ? "lowercase letters?\n" : ''}${wantUCL ? "uppercase letters?\n" : ''}${wantNum ? "numbers?\n" : ""}${wantSpec ? "special characters?" : ''}`
   );
   //if the user confirms that they want to procede, continue to generating a password
   if (!confirmGenerate) return "";

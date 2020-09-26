@@ -42,6 +42,10 @@ header {
   padding: 30px 40px;
 }
 
+.card-header {
+  text-align: center;
+}
+
 .card-header::after {
   content: " ";
   display: block;
@@ -117,6 +121,16 @@ button[disabled] {
   resize: none;
   overflow: hidden;
 }
+
+ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+li {
+  display: inline-flex;
+  list-style: none;
+}
+
 
 @media (max-width: 690px) {
   .btn {
