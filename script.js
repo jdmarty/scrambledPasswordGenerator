@@ -55,34 +55,20 @@ function generatePassword() {
     alert("ERROR you must select at least on valid input type");
     return "";
   }
+
   //prompt user to enter a number between 8 and 128 until they do so successfully
-  while (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
-    //password length must be parsed as an integer, meaning it will return a whole number or NaN (falsy)
-    passwordLength = parseInt(
-      prompt(`How many characters do you want in your password? (8 to 128)`)
-    );
-    //check to see if the user input is in the acceptable range and a truthy value
-    if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
-      //give the user an option to cancel the prompts here
-      var badInput = confirm(
-        "Invalid entry please enter a number between 8 and 128"
-      );
-      if (!badInput) return "";
-    }
-  }
-  //print the users number selection to the DOM
+  var passwordLength = promptNumber();
+  //if the user selected to end the prompts, end the function here
+  if (!passwordLength) return ''
+  //otherwise, print the users number of characters selection to the DOM
   numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`
 
   //Show the user their selections and ask them to confirm that this is what they want to generate
-  var confirmGenerate = confirm(
-    `Are you sure you want a password ${passwordLength} characters long containing: \n${
-      wantLCL ? "lowercase letters?\n" : ""
-    }${wantUCL ? "uppercase letters?\n" : ""}${wantNum ? "numbers?\n" : ""}${
-      wantSpec ? "special characters?" : ""
-    }`
+  var confirmGenerate = confirm(`Are you sure you want a password ${passwordLength} characters long containing: \n\n${wantLCL ? "lowercase letters?\n" : ""}${wantUCL ? "uppercase letters?\n" : ""}${wantNum ? "numbers?\n" : ""}${wantSpec ? "special characters?" : ""}`
   );
-  //if the user confirms that they want to proceed, continue to generating a password
+  //if the user does not confirm that they want to proceed, end the function here
   if (!confirmGenerate) return "";
+
   //until the function is returned...
   while (true) {
     //set the initial password to an empty string
@@ -115,7 +101,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-//function to call a confirm with the input string, associated characters, and DOM element to update 
+//function to call a confirm containing an input string, associated characters, and DOM element to update 
 function promptChoice(promptString, characters, element) {
   //ask the user to confirm if they want a certain type of character
   var wanted = confirm(`Do you want ${promptString} in your password?`);
@@ -123,10 +109,27 @@ function promptChoice(promptString, characters, element) {
   if (wanted) {
     characterOptions += characters;
     element.textContent += " ✔";
-  //if they dont, update just the associated DOM element
+  //if they dont, just update the associated DOM element
   } else {
     element.textContent += " ❌";
   }
   //return the result of the confirm prompt
   return wanted;
+}
+
+//function to prompt the user to enter a number
+function promptNumber() {
+  //parse the prompt as an integer so it returns a whole number or NaN (falsy)
+  var passwordLength = parseInt(prompt("How many characters do you want in your password?"));
+  //validate the response is in acceptable range and truthy
+  if (passwordLength < 8 || passwordLength > 128 || !passwordLength) {
+    //give the user an option to end the prompts here
+    var badInput = confirm("Invalid entry please enter a number between 8 and 128");
+    if (!badInput) return false;
+    //or run the function again if they confirm
+    return promptNumber();
+  } else {
+    //if the password length is in range, return it
+    return passwordLength;
+  }
 }
