@@ -5,10 +5,6 @@ var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "123456789";
 var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 //assign initial global values
-var includesLCL = false;
-var includesUCL = false;
-var includesNum = false;
-var includesSpec = false;
 var wantLCL = false;
 var wantUCL = false;
 var wantNum = false;
@@ -145,6 +141,11 @@ function promptNumber() {
 
 //function to build a password of the desired length and attributes
 function buildPassword(passwordLength) {
+  //set initial values
+  var includesLCL = false;
+  var includesUCL = false;
+  var includesNum = false;
+  var includesSpec = false;
   //set the initial password to an empty string
   var password = "";
   //until you have generated a password of the appropriate length...
