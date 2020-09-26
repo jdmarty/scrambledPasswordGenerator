@@ -11,27 +11,27 @@ var wantNum = false;
 var wantSpec = false;
 var passwordLength = 0;
 var characterOptions = '';
-//assign options panel elements by ID
+//assign DOM elements by ID
 var criteria = document.getElementById('criteria');
 var optionsPanel = document.getElementById('optionsPanel');
+var passwordText = document.querySelector("#password");
+var copiedAlert = document.getElementById('copiedAlert');
 
 //Assign buttons
 var generateBtn = document.querySelector("#generate");
 var regenerateBtn = document.querySelector('#regenerate');
+var copyBtn = document.querySelector('#copy');
 
-// Write password to the #password input
+//Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
   passwordText.value = password;
 }
 
 //Rewrite password based on current global variables
 function rewritePassword() {
   var password = buildPassword(passwordLength);
-  var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  console.log(password);
 }
 
 // Add event listener to generate button
@@ -40,13 +40,12 @@ generateBtn.addEventListener("click", writePassword);
 //Add event listener to regenerate button
 regenerateBtn.addEventListener("click", rewritePassword);
 
+//Add event listener to copy button
+copyBtn.addEventListener("click", copyToClipboard);
+
 //generatePassword function
 function generatePassword() {
-  //set initial values
-  includesLCL = false;
-  includesUCL = false;
-  includesNum = false;
-  includesSpec = false;
+  //reset initial values
   passwordLength = 0;
   characterOptions = "";
   //hide the options panel if it is not hidden already
@@ -61,13 +60,13 @@ function generatePassword() {
   //otherwise, print the users number of characters selection to the DOM
   numberOfCharacters.textContent = `Number of Characters: ${passwordLength}`;
 
-  //ask the user if they want to include lowercase letters
+  //ask the user if they want to include lowercase letters and update global variable
   wantLCL = promptChoice("lowercase letters", lowercaseLetters, 'Lowercase');
-  //ask the user if they want to include uppercase letters and update the option in DOM
+  //ask the user if they want to include uppercase letters and update global variable
   wantUCL = promptChoice("uppercase letters", uppercaseLetters, 'Uppercase');
-  //ask the user if they want to include numbers
+  //ask the user if they want to include numbers and update global variable
   wantNum = promptChoice("numbers", numbers, 'Numbers');
-  //ask the user if they want to include special characters
+  //ask the user if they want to include special characters and update global variable
   wantSpec = promptChoice("special characters", specialChar, 'Special Characters');
   //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
@@ -90,6 +89,19 @@ function generatePassword() {
   return buildPassword(passwordLength);
 }
 
+//function to copy current password to clipboard
+function copyToClipboard() {
+  //check that there is something to copy
+  if (password.value) {
+    //if there is, select the text area and run a copy command
+    passwordText.select();
+    document.execCommand("copy");
+    //display the copied alert
+    copiedAlert.style.display = 'block';
+    //after the animation is finished, hide the copied alert
+    setTimeout(() => copiedAlert.style.display = 'none', 900);
+  }
+}
 
 //Helper Functions//
 //--------------------------------------------------------------------------------------------------------------------
@@ -98,7 +110,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-//function to call a confirm containing an input string, associated characters, and DOM element to update 
+//function to call a confirm, containing an input string, associated characters, and DOM element to update 
 function promptChoice(promptString, characters, domString) {
   //ask the user to confirm if they want a certain type of character
   var wanted = confirm(`Do you want ${promptString} in your password?`);
@@ -166,3 +178,5 @@ function buildPassword(passwordLength) {
     return buildPassword(passwordLength);
   }
 }
+
+

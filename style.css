@@ -47,24 +47,24 @@ header {
   padding: 30px 40px;
 }
 
-/* Centering for header and p tag in criteria panel */
-.card-header, .card-footer, p {
-  text-align: center;
-}
+  /* Centering for header and p tag in criteria panel */
+  .card-header, .card-footer, p {
+    text-align: center;
+  }
 
-/* Add a thin, gray line after every card header and before every card footer */
-.card-header::after, .card-footer::before  {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: #e7e9eb;
-  height: 2px;
-}
+  /* Add a thin, gray line after every card header and before every card footer */
+  .card-header::after, .card-footer::before  {
+    content: " ";
+    display: block;
+    width: 100%;
+    background: #e7e9eb;
+    height: 2px;
+  }
 
-/* Prevent card-body from collapsing below 100px */
-.card-body {
-  min-height: 100px;
-}
+  /* Prevent card-body from collapsing below 100px */
+  .card-body {
+    min-height: 100px;
+  }
 
 /* Styling for button elements */
 .btn {
@@ -108,39 +108,59 @@ button[disabled] {
   overflow: hidden;
 }
 
+/* Set wrapper to contain copy icon */
 .textAreaWrapper {
   position: relative;
 }
 
-#copy {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 4px;
-  padding: 2px;
-  width: 1.2em;
-  cursor: pointer;
-  border-radius: 10%;
-}
+  /* Style copy icon to appear at the bottom right corner of the wrapper */
+  #copy {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 10%;
+  }
 
-#copy:hover {
-  background-color: grey;
-  color: white;
-}
+  /* Change icon appearance on mouse over */
+  #copy:hover {
+    background-color: grey;
+    color: white;
+  }
+
+  /* Styles to position copied alert and set animation */
+  #copiedAlert {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding: 6px;
+    z-index: 1;
+    right: 3%;
+    display: none;
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+  }
+
+  @keyframes fadeOut {
+    from {opacity: 1}
+    to {opacity: 0}
+  }
 
 /* Set options panel to not display at first */
 #optionsPanel {
   display: none;
 }
-/* Set list of criteria to display evenly spaced */
-ul {
-  display: flex;
-  justify-content: space-evenly;
-}
-  li {
-    display: inline-flex;
-    list-style: none;
+  /* Set list of criteria to display evenly spaced */
+  ul {
+    display: flex;
+    justify-content: space-evenly;
   }
+    li {
+      display: inline-flex;
+      list-style: none;
+    }
 
 /* Media query to decrease font size and padding and margins of buttons on medium screens */
 @media (max-width: 690px) {
