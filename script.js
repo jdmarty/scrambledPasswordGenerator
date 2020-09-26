@@ -1,3 +1,15 @@
+//Global variables and DOM assignments
+//assign strings containing each type of acceptable character"
+var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numbers = "123456789";
+var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+//assign list items by ID
+var lowercaseOption = document.getElementById('lowercaseOption');
+var uppercaseOption = document.getElementById('uppercaseOption');
+var numbersOption = document.getElementById('numbersOption');
+var specialOption = document.getElementById('specialOption');
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
@@ -13,11 +25,6 @@ generateBtn.addEventListener("click", writePassword);
 
 //generatePassword function
 function generatePassword() {
-  //assign strings containing each type of acceptable character"
-  var lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
-  var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var numbers = "123456789";
-  var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
   //set initial values
   var includesLCL = false;
   var includesUCL = false;
@@ -25,31 +32,56 @@ function generatePassword() {
   var includesSpec = false;
   var passwordLength = 0;
   var characterOptions = "";
+  //reset DOM Elements
+  lowercaseOption.textContent = "Lowercase"
+  uppercaseOption.textContent = "Uppercase"
+  numbersOption.textContent = "Numbers"
+  specialOption.textContent = "Special Characters"
 
   //ask user what character options they would like in their password
   //ask the user if they want to include lowercase letters
   var wantLCL = confirm(
     `Do you want lowercase letters in your password?`);
   //if they do, add lowercase letters to the options string
-  if (wantLCL) characterOptions += lowercaseLetters;
+  if (wantLCL) {
+    characterOptions += lowercaseLetters;
+    lowercaseOption.textContent += ' ✔'
+  } else {
+    lowercaseOption.textContent += " ❌";
+  }
   //ask the user if they want to include uppercase letters
   var wantUCL = confirm(
-    `Do you want uppercase letters in your password?\nlowercase: ${wantLCL ? "Yes ✔" : "No ❌"}`
+    `Do you want uppercase letters in your password?`
   );
   //if they do, add uppercase letters to the options string
-  if (wantUCL) characterOptions += uppercaseLetters;
+  if (wantUCL) {
+    characterOptions += uppercaseLetters;
+    uppercaseOption.textContent += " ✔";
+  } else {
+    uppercaseOption.textContent += " ❌";
+  }
   //ask the user if they want to include numbers
   var wantNum = confirm(
-    `Do you want numbers in your password?\nlowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}`
+    `Do you want numbers in your password?`
   );
   //if they do, add numbers to the options string
-  if (wantNum) characterOptions += numbers;
+  if (wantNum) {
+    characterOptions += numbers;
+    numbersOption.textContent += " ✔";
+  } else {
+    numbersOption.textContent += " ❌";
+  }
   //ask the user if they want to include special characters
   var wantSpec = confirm(
-    `Do you want special characters in your password?\nlowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}`
+    `Do you want special characters in your password?`
   );
   //if they do, add them to the options string
-  if (wantSpec) characterOptions += specialChar;
+  if (wantSpec) {
+    characterOptions += specialChar;
+    specialOption.textContent += " ✔";
+  } else {
+    specialOption.textContent += " ❌";
+  }
   //If the user has not selected any character types at this time, alert them and end the function
   if (!wantLCL && !wantUCL && !wantNum && !wantSpec) {
     alert("ERROR you must select at least on valid input type");
@@ -60,7 +92,7 @@ function generatePassword() {
     //password length must be parsed as an integer, meaning it will return a whole number or NaN (falsy)
     passwordLength = parseInt(
       prompt(
-        `lowercase: ${wantLCL ? "Yes ✔" : "No ❌"}\nuppercase: ${wantUCL ? "Yes ✔" : "No ❌"}\nnumbers: ${wantNum ? "Yes ✔" : "No ❌"}\nspecial characters: ${wantSpec ? "Yes ✔" : "No ❌"}\n\nHow many characters do you want in your password? (8 to 128)`
+        `How many characters do you want in your password? (8 to 128)`
       )
     );
     //check to see if the user input is in the acceptable range and a truthy values
