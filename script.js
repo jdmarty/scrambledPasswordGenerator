@@ -5,10 +5,7 @@ var uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "123456789";
 var specialChar = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 //assign initial global values
-var wantLCL = false;
-var wantUCL = false;
-var wantNum = false;
-var wantSpec = false;
+var [wantLCL, wantUCL, wantNum, wantSpec] = [false, false, false, false]
 var passwordLength = 0;
 var characterOptions = '';
 //assign DOM elements by ID
@@ -99,7 +96,7 @@ function copyToClipboard() {
     //display the copied alert
     copiedAlert.style.display = 'block';
     //after the animation is finished, hide the copied alert
-    setTimeout(() => copiedAlert.style.display = 'none', 900);
+    setTimeout(() => copiedAlert.style.display = 'none', 990);
   }
 }
 
@@ -145,10 +142,7 @@ function promptNumber() {
 //function to build a password of the desired length and attributes
 function buildPassword(passwordLength) {
   //set initial values
-  var includesLCL = false;
-  var includesUCL = false;
-  var includesNum = false;
-  var includesSpec = false;
+  var [includesLCL, includesUCL, includesNum, includesSpec] = [false, false, false, false]
   var password = "";
   //until you have generated a password of the appropriate length...
   for (let i = 0; i < passwordLength; i++) {

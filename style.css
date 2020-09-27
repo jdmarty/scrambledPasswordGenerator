@@ -129,7 +129,7 @@ button[disabled] {
     color: white;
   }
 
-  /* Styles to position copied alert and set animation */
+  /* Styles to position copied alert and set fade out animation */
   #copiedAlert {
     position: absolute;
     bottom: 0;
